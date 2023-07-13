@@ -1,6 +1,7 @@
+//Coded by Simmone, June 13 2023
 'use strict'
 
-function getComputerChoice() { 
+function getComputerChoice() { //Take random num from 0-2 and associate it with rock, paper, or, scissor
     let randomNumber = Math.floor(Math.random()* 3);
     let computerSelection
 
@@ -22,10 +23,10 @@ function getComputerChoice() {
     return computerSelection;
 } 
 
-let playerWin = 0;
-let computerWin = 0;
+let playerWin = 0; //Store score of player and computer
+let computerWin = 0; //Global because playRound() will modify value and game() will determine win
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) { //Play one round of rps
     if (playerSelection === computerSelection) {
         return `It's a tie! You both chose ${playerSelection}.`;
     } 
@@ -41,12 +42,12 @@ function playRound(playerSelection, computerSelection) {
         computerWin++;
         return `You lost! You chose ${playerSelection} and the computer chose ${computerSelection}.`;
     } 
-    else {
+    else { 
         return 'ERROR! You did not choose rock, paper, or scissors!';
     } 
 } 
 
-function game() { 
+function game() { //Play whole game of rps to 5, access playRound()
     for (let i = 1; i <= 5; i++) {
     console.log(playRound(prompt('Will you choose rock, paper, or scissors?').toLowerCase(), getComputerChoice()));
     }
@@ -64,6 +65,6 @@ function game() {
         alert('ERROR! Something went wrong.');
     }
 
-    playerWin = 0;
+    playerWin = 0; //Reset player and comp win for future games
     computerWin = 0;
 }

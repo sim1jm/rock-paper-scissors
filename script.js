@@ -26,9 +26,6 @@ let playerWin = 0;
 let computerWin = 0;
 
 function playRound(playerSelection, computerSelection) {
-    playerSelection = prompt('Will you choose rock, paper, or scissors?').toLowerCase();
-    computerSelection = getComputerChoice();
-
     if (playerSelection === computerSelection) {
         return `It's a tie! You both chose ${playerSelection}.`;
     } 
@@ -51,7 +48,7 @@ function playRound(playerSelection, computerSelection) {
 
 function game() { 
     for (let i = 1; i <= 5; i++) {
-    console.log(playRound());
+    console.log(playRound(prompt('Will you choose rock, paper, or scissors?').toLowerCase(), getComputerChoice()));
     }
 
     if (playerWin > computerWin) {

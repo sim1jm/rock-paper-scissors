@@ -1,70 +1,73 @@
 //Coded by Simmone, June 13 2023
 'use strict'
 
-function getComputerChoice() { //Take random num from 0-2 and associate it with rock, paper, or, scissor
-    let randomNumber = Math.floor(Math.random()* 3);
-    let computerSelection
+let playerWin = 0;
+let computerWin = 0;
+
+const divResult = document.querySelector('div.result');
+const divScore = document.querySelector('div.score');
+const divWinner = document.querySelector('div.winner');
+
+const buttonRock = document.querySelector('button#Rock');
+const buttonPaper = document.querySelector('button#Paper');
+const buttonScissors = document.querySelector('button#Scissors');
+
+buttonRock.addEventListener('click', () => playRound('Rock', getComputerChoice()));
+buttonPaper.addEventListener('click', () => playRound('Paper', getComputerChoice()));
+buttonScissors.addEventListener('click', () => playRound('Scissors', getComputerChoice()));
+
+function getComputerChoice() { //take random num from 0-2 and associate it with rock, paper, or, scissors
+    const randomNumber = Math.floor(Math.random()* 3);
+    let computerSelection;
 
     switch (randomNumber) {
         case 0:
-            computerSelection = 'rock';
+            computerSelection = 'Rock';
             break;
         case 1:
-            computerSelection = 'paper';
+            computerSelection = 'Paper';
             break;
         case 2:
-            computerSelection = 'scissors';
+            computerSelection = 'Scissors';
             break;
         default:
             computerSelection = null;
             break;
     }
-    
     return computerSelection;
 } 
 
-let playerWin = 0; //Store score of player and computer
-let computerWin = 0; //Global because playRound() will modify value and game() will determine win
-
 function playRound(playerSelection, computerSelection) { //Play one round of rps
     if (playerSelection === computerSelection) {
-        return `It's a tie! You both chose ${playerSelection}.`;
+        divResult.textContent = `It's a tie! You both chose ${playerSelection}.`;
     } 
-    else if (playerSelection === 'rock' && computerSelection === 'scissors' ||
-    playerSelection === 'paper' && computerSelection === 'rock' ||
-    playerSelection === 'scissors' && computerSelection === 'paper') {
+    else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
+    playerSelection === 'Paper' && computerSelection === 'Rock' ||
+    playerSelection === 'Scissors' && computerSelection === 'Paper') {
         playerWin++;
-        return `You won! You chose ${playerSelection} and the computer chose ${computerSelection}.`;
+        divResult.textContent = `You won! ${playerSelection} beats ${computerSelection}.`;
     } 
-    else if (playerSelection === 'rock' && computerSelection === 'paper' ||
-    playerSelection === 'paper' && computerSelection === 'scissors' ||
-    playerSelection === 'scissors' && computerSelection === 'rock') {
+    else if (playerSelection === 'Rock' && computerSelection === 'Paper' ||
+    playerSelection === 'Paper' && computerSelection === 'Scissors' ||
+    playerSelection === 'Scissors' && computerSelection === 'Rock') {
         computerWin++;
-        return `You lost! You chose ${playerSelection} and the computer chose ${computerSelection}.`;
+        divResult.textContent = `You lost! ${computerSelection} beats ${playerSelection}.`;
     } 
     else { 
-        return 'ERROR! You did not choose rock, paper, or scissors!';
+        divResult.textContent = 'ERROR!';
     } 
+
+    divScore.textContent = `${playerWin}-${computerWin}`;
+
+    if (playerWin === 5) {
+        divWinner.textContent = `You won!`;
+        playerWin = 0;
+        computerWin = 0;
+    } else if (computerWin == 5) {
+        divWinner.textContent = `The computer won with!`;
+        playerWin = 0;
+        computerWin = 0;
+    } else {
+        divWinner.textContent = '';
+    }
 } 
-
-function game() { //Play whole game of rps to 5, access playRound()
-    for (let i = 1; i <= 5; i++) {
-    console.log(playRound(prompt('Will you choose rock, paper, or scissors?').toLowerCase(), getComputerChoice()));
-    }
-
-    if (playerWin > computerWin) {
-        alert(`Congratulations! You won the game with a score of ${playerWin}-${computerWin}.`);
-    } 
-    else if (playerWin < computerWin) {
-        alert(`Oh no! You lost the game with a score of ${playerWin}-${computerWin}.`);
-    } 
-    else if (playerWin === computerWin) {
-        alert(`Nice try! You and the computer tied with a score of ${playerWin}-${computerWin}`);
-    } 
-    else {
-        alert('ERROR! Something went wrong.');
-    }
-
-    playerWin = 0; //Reset player and comp win for future games
-    computerWin = 0;
-}

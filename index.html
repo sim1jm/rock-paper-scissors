@@ -3,9 +3,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style></style>
         <title> Rock Paper Scissors </title>
-        <script src="script.js"></script>
+        <script src="script.js" defer></script>
+        <style> 
+            * {
+                text-align: center;
+            }
+        </style>
     </head>
 </html>
 
@@ -14,9 +18,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title> Document </title>
 </head>
 <body>
-    
+    <h1> Rock-Paper-Scissors </h1>
+    <div class="buttons">
+        <button id="Rock"> <img src="https://static.wikia.nocookie.net/omori/images/0/08/ROCK-Rock.png/revision/latest?cb=20210119222400&format=original"> </button>
+        <button id="Paper"> <img src="https://static.wikia.nocookie.net/omori/images/d/de/ROCK-Paper.png/revision/latest?cb=20210119223158&format=original"> </button>
+        <button id="Scissors"> <img src="https://static.wikia.nocookie.net/omori/images/4/4f/ROCK-Scissors.png/revision/latest?cb=20210119223219&format=original"> </button>
+    </div>
+    <div class="result"></div>
+    <div class="score"></div>
+    <div class="winner"></div>
 </body>
 </html>
